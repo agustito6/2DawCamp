@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;  
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins'; 
+    width: 100%;
+    padding: 4%;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+tr, td {
+    padding: 5px;
+}
+
+input, textarea {
+    font-family: 'Poppins';
+}
+
+input[type=submit] {
+    margin-top: 15px;
+    padding: 5px;
+}
+
+input[type=text] {
+    width: 300px;
+}
