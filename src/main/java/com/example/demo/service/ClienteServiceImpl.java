@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,12 +25,11 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public List<ClienteDTO> findAll() {
         log.info("ClienteServiceImpl - findAll: Lista de todos los cliente");
-        
-        List<ClienteDTO> listaClientesDTO = clienteRepository.findAll()
-            .stream()
-            .map(p -> ClienteDTO.convertToDTO(p))
-            .collect(Collectors.toList());
-        return listaClientesDTO;
+
+        return clienteRepository.findAll()
+                .stream()
+                .map(p -> ClienteDTO.convertToDTO(p))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -60,5 +60,14 @@ public class ClienteServiceImpl implements ClienteService {
         Cliente cliente = new Cliente();
         cliente.setId(clienteDTO.getId());
         clienteRepository.delete(cliente);
+    }
+
+    @Override
+    public List<String> validate(ClienteDTO clienteDTO) {
+        List<String> messages = new ArrayList<>();
+        if(clienteDTO.getNombre().isEmpty()){
+            messages.add("El nombre es obligatorio");
+        }
+        return messages;
     }
 }

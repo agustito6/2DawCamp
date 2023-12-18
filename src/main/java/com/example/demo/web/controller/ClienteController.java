@@ -72,12 +72,20 @@ public class ClienteController { // Gestión de clientes. Se suele hacer uno por
     public ModelAndView save(@ModelAttribute("clienteDTO") ClienteDTO clienteDTO) {
         log.info("ClienteController - save: Salvamos los datos del cliente:" +clienteDTO.toString());
 
-        // Invocamos a la capa de servicios para que almacene los datos del cliente
-        clienteService.save(clienteDTO);
-
-        // Redireccionamos para volver a invocar el método que escucha /clientes
-        ModelAndView mav = new ModelAndView("redirect:/clientes");
-        return mav;
+        List<String> errorMessage = clienteService.validate(clienteDTO);
+        ModelAndView mav;
+        if (errorMessage.isEmpty()) {
+            // Invocamos a la capa de servicios para que almacene los datos del cliente
+            clienteService.save(clienteDTO);
+            // Redireccionamos para volver a invocar el método que escucha /clientes
+            mav = new ModelAndView("redirect:/clientes");
+            return mav;
+        } else {
+            // Redireccionamos para volver a invocar el método que escucha /clientes
+            mav = new ModelAndView("clienteform");
+            mav.addObject("errorMessage", errorMessage);
+            return mav;
+        }
     }
 
     // Actualizar la informacion de un cliente
@@ -108,8 +116,6 @@ public class ClienteController { // Gestión de clientes. Se suele hacer uno por
         clienteService.delete(clienteDTO);
 
         // Redireccionamos para volver a invocar al metodo que escucha /clientes
-        ModelAndView mav = new ModelAndView("redirect:/clientes");
-
-        return mav;
+        return new ModelAndView("redirect:/clientes");
     }
 }

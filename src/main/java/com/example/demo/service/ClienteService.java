@@ -8,4 +8,5 @@ public interface ClienteService {
     ClienteDTO findById(ClienteDTO clienteDTO);
     void save(ClienteDTO clienteDTO);
     void delete(ClienteDTO clienteDTO);
+    List<String> validate (ClienteDTO clienteDTO);
 }
