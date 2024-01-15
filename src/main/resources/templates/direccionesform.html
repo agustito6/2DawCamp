@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Crear nueva direccion</title>
+</head>
+<body>
+<h1>Crear nueva direccion</h1>
+<br/>
+<br/>
+<form method="POST" th:action="@{/clientes/{idCliente}/direcciones/save
+(idCliente=${clienteDTO.id})}" th:object="${direccionDTO}">
+    <table border="0">
+        <tr th:if="${direccionDTO.id}">
+            <td>ID</td>
+            <td>:</td>
+            <td>
+                <input readonly th:field="*{id}" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Direccion</td>
+            <td>:</td>
+            <td>
+                <input th:field="*{descripcion}" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>País</td>
+            <td>:</td>
+            <td>
+                <input th:field="*{pais}" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Código postal</td>
+            <td>:</td>
+            <td>
+                <input th:field="*{cp}" type="text"/>
+            </td>
+        </tr>
+    </table>
+    <input th:value="Crear" type="submit"/></form>
+<br/>
+<br/>
+<a
+        th:href="@{/clientes/{idCliente}/direcciones/(idCliente=${clienteDTO.id})}">Volver a la
+    lista de direcciones</a>
+</html>
