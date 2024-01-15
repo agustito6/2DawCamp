@@ -15,7 +15,7 @@ public class Cliente {
     @Id  
     @GeneratedValue(strategy=GenerationType.IDENTITY)   
     private Long id;     
-    
+    //MigueLucky manda
     @Column(name = "nif")   
     private String nif;    
     
