@@ -3,6 +3,7 @@ package com.example.demo.model.dto;
 import java.io.Serializable;
 import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.Recomendacion;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.ToString;
 
@@ -12,6 +13,7 @@ public class RecomendacionDTO implements Serializable {
     private Long id;
     private String observaciones;
     @ToString.Exclude
+    @JsonManagedReference
     private ClienteDTO clienteDTO;
 
     //Convierte una entidad a un objeto DTO

@@ -2,6 +2,7 @@ package com.example.demo.model.dto;
 
 import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.Direccion;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.ToString;
 
@@ -17,6 +18,7 @@ public class DireccionDTO implements Serializable {
     private String pais;
     private String cp;
     @ToString.Exclude
+    @JsonManagedReference
     private List<ClienteDTO> listaClientesDTO;
 
     public static DireccionDTO convertToDTO(Direccion direccion, ClienteDTO clienteDTO) {

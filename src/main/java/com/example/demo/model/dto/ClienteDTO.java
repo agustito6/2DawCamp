@@ -8,6 +8,7 @@ import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.Cuenta;
 import com.example.demo.repository.entity.Direccion;
 import com.example.demo.repository.entity.Recomendacion;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.ToString;
 
@@ -21,10 +22,13 @@ public class ClienteDTO implements Serializable {
     private String claveSeguridad;
     private String email;
     @ToString.Exclude
+    @JsonManagedReference
     private RecomendacionDTO recomendacionDTO;
     @ToString.Exclude
+    @JsonManagedReference
     private List<CuentaDTO> listaCuentasDTO;
     @ToString.Exclude
+    @JsonManagedReference
     private List<DireccionDTO> listaDireccionesDTO;
 
     // Convierte una entidad a un objeto DTO

@@ -34,7 +34,7 @@ public class ClienteController { // Gestión de clientes. Se suele hacer uno por
 
         ModelAndView mav = new ModelAndView("clientes"); // Dices la vista en la que vas a navegar. Sustituye al model y en vez de en el return poner "clientes" devuelves mav
         List<ClienteDTO> listaClientesDTO = clienteService.findAll();
-        mav.addObject("listaClientesDTOBLABLABLABLA", listaClientesDTO);
+        mav.addObject("listaClientesDTO", listaClientesDTO);
 
         return mav;
     }
