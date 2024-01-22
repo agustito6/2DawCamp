@@ -53,4 +53,23 @@ public class ClienteRestController {private static final Logger log =
         clienteRepository.save(cliente);
         return ResponseEntity.ok(cliente);
     }
+
+    @PutMapping(path = "/")
+    public ResponseEntity<Cliente> actualizarCliente(@RequestBody Cliente cliente){
+        if(cliente.getId() == null || clienteRepository.existsById(cliente.getId())){
+            return ResponseEntity.badRequest().build();
+        }
+        clienteRepository.save(cliente);
+        return ResponseEntity.ok(cliente);
+    }
+
+    @DeleteMapping(path = "/{idCliente}")
+    public ResponseEntity<Cliente> eliminarCliente(@PathVariable("idCliente") Long idCliente){
+        if(idCliente == null ){
+            return ResponseEntity.badRequest().build();
+        } else if (clienteRepository.existsById(idCliente)) {
+            clienteRepository.deleteById(idCliente);
+        }
+        return ResponseEntity.noContent().build();
+    }
 }

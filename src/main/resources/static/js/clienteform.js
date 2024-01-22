@@ -23,6 +23,4 @@ const peticion = await fetch('http://localhost:8888/ws/clientes/registro',
     },
     body: JSON.stringify(campos)
 });
-
-
 }

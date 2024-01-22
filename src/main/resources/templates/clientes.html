@@ -36,9 +36,8 @@
                 <td><a
                         th:href="@{/clientes/update/{idCliente}(idCliente=${clienteDTO.id})}"
                 />Editar</a></td>
-                <td><a
-                        th:href="@{/clientes/delete/{idCliente}(idCliente=${clienteDTO.id})}"
-                />Eliminar</a></td>
+                <td>
+                    <button class="botonEliminar" th:onclick="'eliminarCliente(' + ${clienteDTO.id} + ')'" >Eliminar</button>
                 <td><a th:href="@{/clientes/{idCliente}/cuentas
                     (idCliente=${clienteDTO.id})}">Cuentas</a></td>
                 <td><a
@@ -54,6 +53,7 @@
     <a th:href="@{/clientes/add}">Nuevo cliente</a>
     <br>
     <a th:href="@{/}">Volver al inicio</a>
+    <script type="text/javascript" th:src="@{/js/cliente.js}"></script>
 </div>
 </body>
 </html>
