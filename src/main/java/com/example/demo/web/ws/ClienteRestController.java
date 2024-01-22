@@ -1,14 +1,14 @@
-package com.example.demo.web.controller;
+package com.example.demo.web.ws;
 
 import com.example.demo.model.dto.ClienteDTO;
+import com.example.demo.repository.dao.ClienteRepository;
+import com.example.demo.repository.entity.Cliente;
 import com.example.demo.service.ClienteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +18,9 @@ public class ClienteRestController {private static final Logger log =
         LoggerFactory.getLogger(ClienteRestController.class);
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     // Listar los clientes
     @RequestMapping(method = RequestMethod.GET)
@@ -40,5 +43,14 @@ public class ClienteRestController {private static final Logger log =
         clienteDTO.setId(idCliente);
         clienteDTO = clienteService.findById(clienteDTO);
         return clienteDTO;
+    }
+
+    @PostMapping(path = "/registro")
+    public ResponseEntity<Cliente> registrarCliente(@RequestBody Cliente cliente){
+        if(cliente.getId() != null){
+            return ResponseEntity.badRequest().build();
+        }
+        clienteRepository.save(cliente);
+        return ResponseEntity.ok(cliente);
     }
 }

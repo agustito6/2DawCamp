@@ -8,42 +8,27 @@
 </head>
 <body>
     <h1 th:text="${add} ? 'Nuevo cliente' : 'Actualizar cliente'" />
-    <form th:action="@{/clientes/save}" th:object="${clienteDTO}" method="POST">
-        <table border="0">
-            <tr th:if="${clienteDTO.id}">
-                <td>ID</td>
-                <td> <input type="text" th:field="*{id}" readonly /> </td>
-            </tr>
-            <tr>
-                <td>Nombre</td>
-                <td> <input type="text" th:field="*{nombre}" /> </td>
-            </tr>
-            <tr>
-                <td>Apellidos</td>
-                <td> <input type="text" th:field="*{apellidos}" /> </td>
-            </tr>
-            <tr>
-                <td>NIF</td>
-                <td> <input type="text" th:field="*{nif}" /> </td>
-            </tr>
-            <tr>
-                <td>Correo electrónico</td>
-                <td> <input type="text" th:field="*{email}" /> </td>
-            </tr>
-            <tr>
-                <td>Clave seguridad</td>
-                <td> <input type="text" th:field="*{claveSeguridad}" /> </td>
-            </tr>
-            <tr>
-                <td>Recomendación</td>
-                <td> <textarea th:field="*{recomendacionDTO.observaciones}" rows="4" cols="50" /> </td>
-            </tr>
-            <!-- Ocultamos el id de la recomendacion del cliente -->      
-            <input type="hidden" th:field="*{recomendacionDTO.id}"> 
-        </table>
-        <input type="submit" th:value="${add} ? 'Nuevo' : 'Actualizar'" />
+    <form method="POST">
+
+        <input type="text" name="nombre" id="nombre" />
+        <label for="nombre">Nombre</label>
+        <br>
+        <input type="text" name="apellidos" id="apellidos" />
+        <label for="apellidos">Apellidos</label>
+        <br>
+        <input type="text" name="nif" id="nif" />
+        <label for="email">NIF</label>
+        <br>
+        <input type="text" name="email" id="email" />
+        <label for="email">Correo electronico</label>
+        <br>
+        <input type="text" name="claveSeguridad" id="claveSeguridad" />
+        <label for="claveSeguridad">Correo electronico</label>
+        <br>
+        <button id ="botonRegistro" class="botonRegistro">Registrar</button>
     </form>
     <br>
     <a th:href="@{/clientes}">Volver a la lista de clientes</a>
+    <script type="text/javascript" th:src="@{/js/clienteform.js}"></script>
 </body>
 </html>
