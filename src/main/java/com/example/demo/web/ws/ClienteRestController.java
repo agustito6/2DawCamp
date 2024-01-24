@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/ws/clientes")
@@ -33,25 +34,38 @@ public class ClienteRestController {private static final Logger log =
     }
 
     // Visualizar la informacion de un cliente
-    @RequestMapping(method = RequestMethod.GET, path = "/{idCliente}")
-    public ClienteDTO findById(@PathVariable("idCliente") Long idCliente) {
-
-        log.info("ClienteRestController - findById: Mostramos la informacion del cliente:" + idCliente);
-
-        // Obtenemos el cliente y lo pasamos al modelo
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<ClienteDTO> findById(@PathVariable("id") Long id) {
         ClienteDTO clienteDTO = new ClienteDTO();
-        clienteDTO.setId(idCliente);
-        clienteDTO = clienteService.findById(clienteDTO);
-        return clienteDTO;
+        clienteDTO.setId(id);
+        Optional<ClienteDTO> opt = Optional.ofNullable(clienteService.findById(clienteDTO));
+        if(opt.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        } else {
+            return ResponseEntity.ok(opt.get());
+        }
     }
 
-    @PostMapping(path = "/registro")
-    public ResponseEntity<Cliente> registrarCliente(@RequestBody Cliente cliente){
-        if(cliente.getId() != null){
+    //Actualizar un cliente
+
+    @PutMapping(path = "/{id}", consumes = "application/json")
+    public ResponseEntity<ClienteDTO> actualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
+        if (id == null) {
             return ResponseEntity.badRequest().build();
         }
-        clienteRepository.save(cliente);
-        return ResponseEntity.ok(cliente);
+        clienteDTO.setId(id);
+        clienteService.save(clienteDTO);
+        return ResponseEntity.ok(clienteDTO);
+    }
+
+
+    @PostMapping(path = "/registro")
+    public ResponseEntity<ClienteDTO> registrarCliente(@RequestBody ClienteDTO clienteDTO){
+        if(clienteDTO.getId() != null){
+            return ResponseEntity.badRequest().build();
+        }
+        clienteService.save(clienteDTO);
+        return ResponseEntity.ok(clienteDTO);
     }
 
     @PutMapping(path = "/")
@@ -65,11 +79,10 @@ public class ClienteRestController {private static final Logger log =
 
     @DeleteMapping(path = "/{idCliente}")
     public ResponseEntity<Cliente> eliminarCliente(@PathVariable("idCliente") Long idCliente){
-        if(idCliente == null ){
+        if(idCliente == null || !clienteRepository.existsById(idCliente)){
             return ResponseEntity.badRequest().build();
-        } else if (clienteRepository.existsById(idCliente)) {
-            clienteRepository.deleteById(idCliente);
         }
+        clienteRepository.deleteById(idCliente);
         return ResponseEntity.noContent().build();
     }
 }

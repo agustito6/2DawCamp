@@ -7,9 +7,7 @@ import java.util.List;
 import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.Cuenta;
 import com.example.demo.repository.entity.Direccion;
-import com.example.demo.repository.entity.Recomendacion;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.ToString;
 
@@ -22,15 +20,12 @@ public class ClienteDTO implements Serializable {
     private String apellidos;
     private String claveSeguridad;
     private String email;
-    @ToString.Exclude
-    @JsonBackReference
-    private RecomendacionDTO recomendacionDTO;
-    @ToString.Exclude
+    /*@ToString.Exclude
     @JsonBackReference
     private List<CuentaDTO> listaCuentasDTO;
     @ToString.Exclude
     @JsonBackReference
-    private List<DireccionDTO> listaDireccionesDTO;
+    private List<DireccionDTO> listaDireccionesDTO;*/
 
     // Convierte una entidad a un objeto DTO
     public static ClienteDTO convertToDTO(Cliente cliente) {
@@ -43,12 +38,8 @@ public class ClienteDTO implements Serializable {
         clienteDTO.setApellidos(cliente.getApellidos());
         clienteDTO.setClaveSeguridad(cliente.getClaveSeguridad());
         clienteDTO.setEmail(cliente.getEmail());
-        // Asignamos la recomendacionDTO pasandole el clienteDTO como parámetro
-        RecomendacionDTO rec = RecomendacionDTO.convertToDTO(cliente.getRecomendacion(),
-                clienteDTO);
-        clienteDTO.setRecomendacionDTO(rec);
         // Cargamos la lista de cuentas
-        for(int i=0;i<cliente.getListaCuentas().size();i++) {
+        /*for(int i=0;i<cliente.getListaCuentas().size();i++) {
             CuentaDTO cuentadto = CuentaDTO.convertToDTO(cliente.getListaCuentas().get(i),
                     clienteDTO);
             clienteDTO.getListaCuentasDTO().add(cuentadto);
@@ -58,7 +49,7 @@ public class ClienteDTO implements Serializable {
             DireccionDTO direcciondto =
                     DireccionDTO.convertToDTO(cliente.getListaDirecciones().get(i), clienteDTO);
             clienteDTO.getListaDireccionesDTO().add(direcciondto);
-        }
+        }*/
 
         return clienteDTO;
     }
@@ -74,9 +65,7 @@ public class ClienteDTO implements Serializable {
         cliente.setClaveSeguridad(clienteDTO.getClaveSeguridad());
         cliente.setEmail(clienteDTO.getEmail());
 
-        Recomendacion rec = RecomendacionDTO.convertToEntity(clienteDTO.getRecomendacionDTO(), cliente);
-        cliente.setRecomendacion(rec);
-
+/*
         // Cargamos la lista de cuentas
         for(int i=0;i<clienteDTO.getListaCuentasDTO().size();i++) {
             Cuenta cuenta = CuentaDTO.convertToEntity(clienteDTO.getListaCuentasDTO().get(i));
@@ -87,7 +76,7 @@ public class ClienteDTO implements Serializable {
             Direccion direccion =
                     DireccionDTO.convertToEntity(clienteDTO.getListaDireccionesDTO().get(i), cliente);
             cliente.getListaDirecciones().add(direccion);
-        }
+        }*/
 
         return cliente;
     }
@@ -95,8 +84,7 @@ public class ClienteDTO implements Serializable {
     // Constructor vacio
     public ClienteDTO() {
         super();
-        this.recomendacionDTO = new RecomendacionDTO();
-        this.listaCuentasDTO = new ArrayList<CuentaDTO>();
-        this.listaDireccionesDTO = new ArrayList<DireccionDTO>();
+        //this.listaCuentasDTO = new ArrayList<CuentaDTO>();
+        //this.listaDireccionesDTO = new ArrayList<DireccionDTO>();
     }
 }

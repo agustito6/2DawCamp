@@ -1,59 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mantenimiento de clientes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Clientes</title>
 </head>
 <body>
-<div>
-    <br>
-    <h2 th:if="${listaClientesDTO.isEmpty()}">No hay clientes</h2>
-    <div th:if="${!listaClientesDTO.isEmpty()}">
-        <h2>Mantenimiento de clientes</h2>
-        <table border="1">
-            <thead>
-            <tr>
-                <td>id</td>
-                <td>Nombre</td>
-                <td>Apellidos</td>
-                <td>NIF</td>
-                <td>Correo electrónico</td>
-                <td>Editar</td>
-                <td>Eliminar</td>
-                <th>Cuentas</th>
-                <th>Direcciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="clienteDTO : ${listaClientesDTO}">
-                <td><a
-                        th:href="@{/clientes/{idCliente}(idCliente=${clienteDTO.id})}"
-                        th:text="${clienteDTO.id}"></a></td>
-                <td th:text="${clienteDTO.nombre}" />
-                <td th:text="${clienteDTO.apellidos}" />
-                <td th:text="${clienteDTO.nif}" />
-                <td th:text="${clienteDTO.email}" />
-                <td><a
-                        th:href="@{/clientes/update/{idCliente}(idCliente=${clienteDTO.id})}"
-                />Editar</a></td>
-                <td>
-                    <button class="botonEliminar" th:onclick="'eliminarCliente(' + ${clienteDTO.id} + ')'" >Eliminar</button>
-                <td><a th:href="@{/clientes/{idCliente}/cuentas
-                    (idCliente=${clienteDTO.id})}">Cuentas</a></td>
-                <td><a
-                        th:href="@{/clientes/{idCliente}/direcciones
-(idCliente=${clienteDTO.id})}">Direcciones</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<br>
-<div>
-    <a th:href="@{/clientes/add}">Nuevo cliente</a>
-    <br>
-    <a th:href="@{/}">Volver al inicio</a>
-    <script type="text/javascript" th:src="@{/js/cliente.js}"></script>
-</div>
+<h1>Lista de Clientes</h1>
+<table id="datos" border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<a th:href="@{/clientes/add}">Nuevo cliente</a>
+<script type="text/javascript" th:src="@{/js/cliente.js}"></script>
 </body>
 </html>
