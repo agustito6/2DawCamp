@@ -7,43 +7,29 @@
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-    <h1 th:text="${add} ? 'Nuevo cliente' : 'Actualizar cliente'" />
-    <form th:action="@{/clientes/save}" th:object="${clienteDTO}" method="POST">
-        <table border="0">
-            <tr th:if="${clienteDTO.id}">
-                <td>ID</td>
-                <td> <input type="text" th:field="*{id}" readonly /> </td>
-            </tr>
-            <tr>
-                <td>Nombre</td>
-                <td> <input type="text" th:field="*{nombre}" /> </td>
-            </tr>
-            <tr>
-                <td>Apellidos</td>
-                <td> <input type="text" th:field="*{apellidos}" /> </td>
-            </tr>
-            <tr>
-                <td>NIF</td>
-                <td> <input type="text" th:field="*{nif}" /> </td>
-            </tr>
-            <tr>
-                <td>Correo electrónico</td>
-                <td> <input type="text" th:field="*{email}" /> </td>
-            </tr>
-            <tr>
-                <td>Clave seguridad</td>
-                <td> <input type="text" th:field="*{claveSeguridad}" /> </td>
-            </tr>
-            <tr>
-                <td>Recomendación</td>
-                <td> <textarea th:field="*{recomendacionDTO.observaciones}" rows="4" cols="50" /> </td>
-            </tr>
-            <!-- Ocultamos el id de la recomendacion del cliente -->      
-            <input type="hidden" th:field="*{recomendacionDTO.id}"> 
-        </table>
-        <input type="submit" th:value="${add} ? 'Nuevo' : 'Actualizar'" />
+    <form method="POST" id="clienteForm">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" id="nombre" />
+        <br>
+        <label for="apellidos">Apellidos</label>
+        <input type="text" name="apellidos" id="apellidos" />
+        <br>
+        <label for="email">NIF</label>
+        <input type="text" name="nif" id="nif" />
+        <br>
+        <label for="email">Correo electronico</label>
+        <input type="text" name="email" id="email" />
+        <br>
+        <label for="claveSeguridad">Clave de seguridad</label>
+        <input type="text" name="claveSeguridad" id="claveSeguridad" placeholder="No pongas la fecha de nacimiento de tu perr@ anda"/>
+        <br>
+
+        <button id="botonRegistro" class="botonRegistro">Registrar</button>
+        <button id="botonActualizar" class="botonActualizar" disabled>Actualizar</button>
+
     </form>
     <br>
     <a th:href="@{/clientes}">Volver a la lista de clientes</a>
+    <script type="text/javascript" th:src="@{/js/clienteform.js}"></script>
 </body>
 </html>

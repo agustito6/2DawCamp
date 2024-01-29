@@ -31,10 +31,6 @@ public class Cliente {
     @Column(name = "email")  
     private String email;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cliente") 
-    @ToString.Exclude   
-    private Recomendacion recomendacion;
-
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Cuenta> listaCuentas;
 

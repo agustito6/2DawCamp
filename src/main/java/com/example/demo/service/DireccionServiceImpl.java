@@ -41,7 +41,7 @@ public class DireccionServiceImpl implements DireccionService {
     }
     @Override
     public void save(DireccionDTO direccionDTO) {
-        log.info("DireccionServiceImpl - save: Salva la direccion del cliente: "
+        /*//log.info("DireccionServiceImpl - save: Salva la direccion del cliente: "
                 + direccionDTO.getListaClientesDTO().get(0).getId());
         // Solo hay un clienteDTO en la direccionDTO
         Optional<Cliente> cliente =
@@ -52,6 +52,6 @@ public class DireccionServiceImpl implements DireccionService {
             cliente.get().getListaDirecciones().add(direccion);
             // Almacenamos la direccion, y por la relacion que tiene, almacenará la relacion N a N
             direccionRepository.save(direccion);
-        }
+        }*/
     }
 }

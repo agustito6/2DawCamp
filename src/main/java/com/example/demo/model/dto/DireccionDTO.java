@@ -2,6 +2,7 @@ package com.example.demo.model.dto;
 
 import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.Direccion;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.ToString;
 
@@ -16,8 +17,9 @@ public class DireccionDTO implements Serializable {
     private String descripcion;
     private String pais;
     private String cp;
-    @ToString.Exclude
-    private List<ClienteDTO> listaClientesDTO;
+    /*@ToString.Exclude
+    @JsonManagedReference
+    private List<ClienteDTO> listaClientesDTO;*/
 
     public static DireccionDTO convertToDTO(Direccion direccion, ClienteDTO clienteDTO) {
         DireccionDTO direccionDTO = new DireccionDTO();
@@ -28,7 +30,7 @@ public class DireccionDTO implements Serializable {
         // No tiene sentido mapear todos los clientes que tiene la direccion, puesto que
         // al mapear cada cliente volveriamos a mapear sus direcciones, y así
         // sucesivamente.
-        direccionDTO.getListaClientesDTO().add(clienteDTO);
+        //direccionDTO.getListaClientesDTO().add(clienteDTO);
         return direccionDTO;
     }
     public static Direccion convertToEntity(DireccionDTO direccionDTO, Cliente cliente) {
@@ -46,6 +48,6 @@ public class DireccionDTO implements Serializable {
     // Constructor vacio
     public DireccionDTO() {
         super();
-        this.listaClientesDTO = new ArrayList<ClienteDTO>();
+        //this.listaClientesDTO = new ArrayList<ClienteDTO>();
     }
 }

@@ -3,6 +3,7 @@ package com.example.demo.model.dto;
 import java.io.Serializable;
 import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.Cuenta;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.ToString;
 @Data
@@ -16,6 +17,7 @@ public class CuentaDTO implements Serializable{
     private String numeroCuenta;
     private float saldoActual;
     @ToString.Exclude
+    @JsonManagedReference
     private ClienteDTO clienteDTO;
 
     public static CuentaDTO convertToDTO(Cuenta cuenta, ClienteDTO cliente) {

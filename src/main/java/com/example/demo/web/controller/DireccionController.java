@@ -65,9 +65,9 @@ public class DireccionController {
         clienteDTO = clienteService.findById(clienteDTO);
         // Anyadimos al cliente la direccion. Puede haber varias direcciones ya en el
         // clienteDTO
-        clienteDTO.getListaDireccionesDTO().add(direccionDTO);
+        //clienteDTO.getListaDireccionesDTO().add(direccionDTO);
         // Anyadimos a la direccion el cliente. En este momento solo habra un clienteDTO
-        direccionDTO.getListaClientesDTO().add(clienteDTO);
+        //direccionDTO.getListaClientesDTO().add(clienteDTO);
         direccionService.save(direccionDTO);
         // Redireccionamos para volver a invocar el metodo que escucha /clientes
         ModelAndView mav = new ModelAndView("redirect:/clientes/{idCliente}/direcciones");
